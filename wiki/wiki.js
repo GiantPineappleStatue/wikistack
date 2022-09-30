@@ -65,14 +65,14 @@ router.get('/:slug', async (req, res, next) => {
       }
     });
     // console.log(page.authorId)
-  const authorName = await User.findAll({
+  const authorName = await User.findOne({
     attributes: ['name'],
     where:{
       id: page.authorId
     }
   })
 
-    res.send(wikiPage(page, authorName[0].dataValues.name))
+    res.send(wikiPage(page, authorName.dataValues.name))
   } catch(error) {
     next(error)
   }
